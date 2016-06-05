@@ -13,15 +13,14 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollBar;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
-import java.awt.Dialog.ModalExclusionType;
-import javax.swing.SwingConstants;
-import java.awt.Scrollbar;
 
 public class View extends JFrame {
 
@@ -29,14 +28,12 @@ public class View extends JFrame {
 	private JPanel panelCotacao = new JPanel();
 	private JPanel panelSolicitacao = new JPanel();
 	private JPanel panelAprovacao = new JPanel();
+	JPanel panelPedidos = new JPanel();
 	private boolean pnlAprovacao = false;
 	private boolean pnlSolicitacao = false;
 	private boolean pnlCotacao = false;
+	private boolean pnlPedidos = false;
 	private JTextField textField;
-	/**
-	 * @wbp.nonvisual location=34,79
-	 */
-	private final Scrollbar scrollbar = new Scrollbar();
 
 	/**
 	 * Launch the application.
@@ -58,8 +55,6 @@ public class View extends JFrame {
 	 * Create the frame.
 	 */
 	public View() {
-		scrollbar.setMaximum(1000);
-		scrollbar.setBackground(Color.BLUE);
 		setTitle("Compras");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 678, 970);
@@ -106,45 +101,76 @@ public class View extends JFrame {
 					pnlAprovacao = false;
 
 				panelAprovacao.setVisible(pnlAprovacao);
-
 			}
 		});
 		
 		
 		panelAprovacao.setBorder(new TitledBorder(null, "Aprova\u00E7\u00E3o", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		
+		JScrollBar scrollBar = new JScrollBar();
+		
+		JButton btnNewButton_2 = new JButton("Gerar Pedido");
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (pnlPedidos == false)
+					pnlPedidos = true;
+				else
+					pnlPedidos = false;
+
+				panelPedidos.setVisible(pnlPedidos);
+			}
+		});
+				
+		panelPedidos.setBorder(new TitledBorder(null, "Pedidos", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
 					.addGap(48)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+						.addComponent(panelPedidos, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 566, Short.MAX_VALUE)
+						.addComponent(btnNewButton_2, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 566, Short.MAX_VALUE)
 						.addComponent(panelAprovacao, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 566, Short.MAX_VALUE)
 						.addComponent(btnNewButton_1, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 566, Short.MAX_VALUE)
 						.addComponent(panelSolicitacao, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 566, Short.MAX_VALUE)
 						.addComponent(btnGerarSolicitao, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 566, Short.MAX_VALUE)
 						.addComponent(panelCotacao, GroupLayout.DEFAULT_SIZE, 566, Short.MAX_VALUE)
 						.addComponent(btnNewButton, GroupLayout.DEFAULT_SIZE, 566, Short.MAX_VALUE))
-					.addGap(38))
+					.addGap(21)
+					.addComponent(scrollBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGap(6)
-					.addComponent(btnNewButton)
-					.addGap(18)
-					.addComponent(panelCotacao, GroupLayout.PREFERRED_SIZE, 246, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnGerarSolicitao)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(panelSolicitacao, GroupLayout.PREFERRED_SIZE, 177, GroupLayout.PREFERRED_SIZE)
-					.addGap(18)
-					.addComponent(btnNewButton_1)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(panelAprovacao, GroupLayout.PREFERRED_SIZE, 144, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(220, Short.MAX_VALUE))
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING, false)
+						.addComponent(scrollBar, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
+							.addComponent(btnNewButton)
+							.addGap(18)
+							.addComponent(panelCotacao, GroupLayout.PREFERRED_SIZE, 246, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(btnGerarSolicitao)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(panelSolicitacao, GroupLayout.PREFERRED_SIZE, 177, GroupLayout.PREFERRED_SIZE)
+							.addGap(18)
+							.addComponent(btnNewButton_1)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(panelAprovacao, GroupLayout.PREFERRED_SIZE, 144, GroupLayout.PREFERRED_SIZE)
+							.addGap(18)
+							.addComponent(btnNewButton_2)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(panelPedidos, GroupLayout.PREFERRED_SIZE, 147, GroupLayout.PREFERRED_SIZE)))
+					.addContainerGap(21, Short.MAX_VALUE))
 		);
+		panelPedidos.setLayout(null);
+		
+		JTextArea textArea_1 = new JTextArea();
+		textArea_1.setBounds(30, 31, 509, 84);
+		panelPedidos.add(textArea_1);
 		panelAprovacao.setLayout(null);
 		panelAprovacao.setVisible(false);
+		panelPedidos.setVisible(false);
 		
 		JLabel lblSetor = new JLabel("Setor");
 		lblSetor.setHorizontalAlignment(SwingConstants.RIGHT);
