@@ -19,15 +19,24 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
+import java.awt.Dialog.ModalExclusionType;
+import javax.swing.SwingConstants;
+import java.awt.Scrollbar;
 
 public class View extends JFrame {
 
-	private JPanel contentPane;
-	private boolean pnlCotacao = false;
+	private JPanel contentPane;	
 	private JPanel panelCotacao = new JPanel();
 	private JPanel panelSolicitacao = new JPanel();
+	private JPanel panelAprovacao = new JPanel();
+	private boolean pnlAprovacao = false;
 	private boolean pnlSolicitacao = false;
+	private boolean pnlCotacao = false;
 	private JTextField textField;
+	/**
+	 * @wbp.nonvisual location=34,79
+	 */
+	private final Scrollbar scrollbar = new Scrollbar();
 
 	/**
 	 * Launch the application.
@@ -49,8 +58,11 @@ public class View extends JFrame {
 	 * Create the frame.
 	 */
 	public View() {
+		scrollbar.setMaximum(1000);
+		scrollbar.setBackground(Color.BLUE);
+		setTitle("Compras");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 678, 650);
+		setBounds(100, 100, 678, 970);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -84,61 +96,130 @@ public class View extends JFrame {
 
 		panelSolicitacao.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Solicita\u00E7\u00E3o",
 				TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		
+		JButton btnNewButton_1 = new JButton("Gerar Aprova\u00E7\u00E3o");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (pnlAprovacao == false)
+					pnlAprovacao = true;
+				else
+					pnlAprovacao = false;
+
+				panelAprovacao.setVisible(pnlAprovacao);
+
+			}
+		});
+		
+		
+		panelAprovacao.setBorder(new TitledBorder(null, "Aprova\u00E7\u00E3o", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
-		gl_contentPane.setHorizontalGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-				.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup().addGap(48).addGroup(gl_contentPane
-						.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-								.addComponent(panelSolicitacao, GroupLayout.PREFERRED_SIZE, 571,
-										GroupLayout.PREFERRED_SIZE)
-								.addContainerGap())
-						.addGroup(gl_contentPane.createSequentialGroup()
-								.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-										.addComponent(btnGerarSolicitao, Alignment.LEADING, GroupLayout.DEFAULT_SIZE,
-												566, Short.MAX_VALUE)
-										.addComponent(panelCotacao, GroupLayout.DEFAULT_SIZE, 566, Short.MAX_VALUE)
-										.addComponent(btnNewButton, GroupLayout.DEFAULT_SIZE, 566, Short.MAX_VALUE))
-								.addGap(38)))));
-		gl_contentPane
-				.setVerticalGroup(
-						gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_contentPane.createSequentialGroup().addGap(6)
-										.addComponent(btnNewButton).addGap(18)
-										.addComponent(panelCotacao, GroupLayout.PREFERRED_SIZE, 246,
-												GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(ComponentPlacement.RELATED).addComponent(btnGerarSolicitao)
-										.addPreferredGap(ComponentPlacement.UNRELATED).addComponent(panelSolicitacao,
-												GroupLayout.PREFERRED_SIZE, 177, GroupLayout.PREFERRED_SIZE)
-										.addContainerGap(91, Short.MAX_VALUE)));
+		gl_contentPane.setHorizontalGroup(
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+					.addGap(48)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+						.addComponent(panelAprovacao, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 566, Short.MAX_VALUE)
+						.addComponent(btnNewButton_1, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 566, Short.MAX_VALUE)
+						.addComponent(panelSolicitacao, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 566, Short.MAX_VALUE)
+						.addComponent(btnGerarSolicitao, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 566, Short.MAX_VALUE)
+						.addComponent(panelCotacao, GroupLayout.DEFAULT_SIZE, 566, Short.MAX_VALUE)
+						.addComponent(btnNewButton, GroupLayout.DEFAULT_SIZE, 566, Short.MAX_VALUE))
+					.addGap(38))
+		);
+		gl_contentPane.setVerticalGroup(
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(6)
+					.addComponent(btnNewButton)
+					.addGap(18)
+					.addComponent(panelCotacao, GroupLayout.PREFERRED_SIZE, 246, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btnGerarSolicitao)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(panelSolicitacao, GroupLayout.PREFERRED_SIZE, 177, GroupLayout.PREFERRED_SIZE)
+					.addGap(18)
+					.addComponent(btnNewButton_1)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(panelAprovacao, GroupLayout.PREFERRED_SIZE, 144, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(220, Short.MAX_VALUE))
+		);
+		panelAprovacao.setLayout(null);
+		panelAprovacao.setVisible(false);
+		
+		JLabel lblSetor = new JLabel("Setor");
+		lblSetor.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblSetor.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblSetor.setBounds(10, 33, 103, 14);
+		panelAprovacao.add(lblSetor);
+		
+		JLabel lblGestor = new JLabel("Gestor");
+		lblGestor.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblGestor.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblGestor.setBounds(10, 58, 103, 14);
+		panelAprovacao.add(lblGestor);
+		
+		JLabel lblSuperintendente = new JLabel("Superintendente");
+		lblSuperintendente.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblSuperintendente.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblSuperintendente.setBounds(10, 83, 103, 14);
+		panelAprovacao.add(lblSuperintendente);
+		
+		JLabel lblDiretor = new JLabel("Diretor");
+		lblDiretor.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblDiretor.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblDiretor.setBounds(10, 108, 103, 14);
+		panelAprovacao.add(lblDiretor);
+		
+		JComboBox comboBoxSetor = new JComboBox();
+		comboBoxSetor.setBounds(123, 30, 155, 20);
+		panelAprovacao.add(comboBoxSetor);
+		
+		JComboBox comboBoxGestor = new JComboBox();
+		comboBoxGestor.setBounds(123, 55, 155, 20);
+		panelAprovacao.add(comboBoxGestor);
+		
+		JComboBox comboBoxSuprimento = new JComboBox();
+		comboBoxSuprimento.setBounds(123, 80, 155, 20);
+		panelAprovacao.add(comboBoxSuprimento);
+		
+		JComboBox comboBoxDiretor = new JComboBox();
+		comboBoxDiretor.setBounds(123, 105, 155, 20);
+		panelAprovacao.add(comboBoxDiretor);
 		panelSolicitacao.setVisible(false);
 		panelSolicitacao.setLayout(null);
-
+		
 		JLabel lblCdigo = new JLabel("C\u00F3digo");
+		lblCdigo.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblCdigo.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblCdigo.setBounds(10, 24, 96, 14);
 		panelSolicitacao.add(lblCdigo);
 
 		JLabel lblFornecedor = new JLabel("Fornecedor");
+		lblFornecedor.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblFornecedor.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblFornecedor.setBounds(10, 49, 96, 14);
 		panelSolicitacao.add(lblFornecedor);
 
 		JLabel lblProduto_1 = new JLabel("Produto");
+		lblProduto_1.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblProduto_1.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblProduto_1.setBounds(10, 74, 96, 14);
 		panelSolicitacao.add(lblProduto_1);
 
 		JLabel lblQuantidade_1 = new JLabel("Quantidade");
+		lblQuantidade_1.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblQuantidade_1.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblQuantidade_1.setBounds(10, 99, 96, 14);
 		panelSolicitacao.add(lblQuantidade_1);
 
 		JLabel lblValorUnitrio = new JLabel("Valor unit\u00E1rio");
+		lblValorUnitrio.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblValorUnitrio.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblValorUnitrio.setBounds(10, 124, 96, 14);
 		panelSolicitacao.add(lblValorUnitrio);
 
 		JLabel lblValorTotal = new JLabel("Valor Total");
+		lblValorTotal.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblValorTotal.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblValorTotal.setBounds(10, 152, 96, 14);
 		panelSolicitacao.add(lblValorTotal);
