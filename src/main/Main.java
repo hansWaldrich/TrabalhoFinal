@@ -10,5 +10,4 @@ public class Main {
 		view.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		view.setVisible(true);
 	}
-
 }

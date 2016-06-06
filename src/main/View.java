@@ -21,6 +21,12 @@ import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
+import javax.swing.DefaultComboBoxModel;
+
+import com.sun.org.apache.bcel.internal.generic.LALOAD;
+
+import java.awt.event.ItemListener;
+import java.awt.event.ItemEvent;
 
 public class View extends JFrame {
 
@@ -34,7 +40,8 @@ public class View extends JFrame {
 	private boolean pnlCotacao = false;
 	private boolean pnlPedidos = false;
 	private JTextField textField;
-
+	private JLabel lblObs = new JLabel("Material Cirúrgico");
+	
 	/**
 	 * Launch the application.
 	 */
@@ -107,8 +114,6 @@ public class View extends JFrame {
 		
 		panelAprovacao.setBorder(new TitledBorder(null, "Aprova\u00E7\u00E3o", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		
-		JScrollBar scrollBar = new JScrollBar();
-		
 		JButton btnNewButton_2 = new JButton("Gerar Pedido");
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -124,8 +129,8 @@ public class View extends JFrame {
 		panelPedidos.setBorder(new TitledBorder(null, "Pedidos", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+			gl_contentPane.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGap(48)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
 						.addComponent(panelPedidos, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 566, Short.MAX_VALUE)
@@ -136,31 +141,27 @@ public class View extends JFrame {
 						.addComponent(btnGerarSolicitao, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 566, Short.MAX_VALUE)
 						.addComponent(panelCotacao, GroupLayout.DEFAULT_SIZE, 566, Short.MAX_VALUE)
 						.addComponent(btnNewButton, GroupLayout.DEFAULT_SIZE, 566, Short.MAX_VALUE))
-					.addGap(21)
-					.addComponent(scrollBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addGap(38))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGap(6)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING, false)
-						.addComponent(scrollBar, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
-							.addComponent(btnNewButton)
-							.addGap(18)
-							.addComponent(panelCotacao, GroupLayout.PREFERRED_SIZE, 246, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnGerarSolicitao)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(panelSolicitacao, GroupLayout.PREFERRED_SIZE, 177, GroupLayout.PREFERRED_SIZE)
-							.addGap(18)
-							.addComponent(btnNewButton_1)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(panelAprovacao, GroupLayout.PREFERRED_SIZE, 144, GroupLayout.PREFERRED_SIZE)
-							.addGap(18)
-							.addComponent(btnNewButton_2)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(panelPedidos, GroupLayout.PREFERRED_SIZE, 147, GroupLayout.PREFERRED_SIZE)))
+					.addComponent(btnNewButton)
+					.addGap(18)
+					.addComponent(panelCotacao, GroupLayout.PREFERRED_SIZE, 246, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btnGerarSolicitao)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(panelSolicitacao, GroupLayout.PREFERRED_SIZE, 177, GroupLayout.PREFERRED_SIZE)
+					.addGap(18)
+					.addComponent(btnNewButton_1)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(panelAprovacao, GroupLayout.PREFERRED_SIZE, 144, GroupLayout.PREFERRED_SIZE)
+					.addGap(18)
+					.addComponent(btnNewButton_2)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(panelPedidos, GroupLayout.PREFERRED_SIZE, 147, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap(21, Short.MAX_VALUE))
 		);
 		panelPedidos.setLayout(null);
@@ -252,19 +253,46 @@ public class View extends JFrame {
 		panelCotacao.setLayout(null);
 
 		JLabel lblProduto = new JLabel("Produto");
-		lblProduto.setBounds(48, 32, 46, 14);
+		lblProduto.setBounds(10, 32, 46, 14);
 		panelCotacao.add(lblProduto);
 
 		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(127, 29, 180, 20);
+		comboBox.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent arg0) {
+				String item = (String) arg0.getItem();
+				System.out.println(item);
+				if(item.equals("Material Cirúrgico"))
+					lblObs.setText("Comprado por Unidade");
+				if(item.equals("Medicamentos "))
+					lblObs.setText("Comprado por caixa de 30 comprimidos");
+				if(item.equals("Gaze"))
+					lblObs.setText("Comprado por caixa de 100 pacotes");
+				if(item.equals("Stent"))
+					lblObs.setText("Comprado por Unidade");
+				if(item.equals("Algodão"))
+					lblObs.setText("Comprado por caixa com 50 pacotes – cada um com 5 metros");
+				if(item.equals("Copos Plásticos"))
+					lblObs.setText("Comprados por cento");
+				if(item.equals("Materiais Oncologia"))
+					lblObs.setText("Comprados por Unidade");
+				if(item.equals("Avental médico"))
+					lblObs.setText("Comprados por Dezena");
+				if(item.equals("Máscara para uso na Cirurgia")){
+					lblObs.setText("Comprados por Dezena");
+				}				
+			}
+		});
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Material Cir\u00FArgico", "Medicamentos", "Gaze", "Papel Higi\u00EAnico", "Stent", "Algod\u00E3o", "Copos Pl\u00E1sticos", "Materiais Oncologia", "Avental m\u00E9dico", "M\u00E1scara para uso na Cirurgia"}));
+		comboBox.setToolTipText("");
+		comboBox.setBounds(82, 29, 180, 20);
 		panelCotacao.add(comboBox);
 
 		JLabel lblQuantidade = new JLabel("Quantidade");
-		lblQuantidade.setBounds(48, 68, 72, 14);
+		lblQuantidade.setBounds(10, 68, 72, 14);
 		panelCotacao.add(lblQuantidade);
 
 		textField = new JTextField();
-		textField.setBounds(127, 65, 180, 20);
+		textField.setBounds(82, 65, 180, 20);
 		panelCotacao.add(textField);
 		textField.setColumns(10);
 
@@ -291,6 +319,10 @@ public class View extends JFrame {
 		JLabel lblCotaes = new JLabel("Cota\u00E7\u00F5es");
 		lblCotaes.setBounds(10, 81, 66, 14);
 		panel.add(lblCotaes);
+		lblObs.setFont(new Font("Tahoma", Font.PLAIN, 10));
+				
+		lblObs.setBounds(272, 68, 284, 14);
+		panelCotacao.add(lblObs);
 		panelCotacao.setVisible(false);
 		contentPane.setLayout(gl_contentPane);
 	}

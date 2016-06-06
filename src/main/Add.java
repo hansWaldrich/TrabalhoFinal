@@ -52,47 +52,47 @@ public class Add extends JFrame {
 		contentPane.setLayout(null);
 		
 		textFieldFornecedor = new JTextField();
-		textFieldFornecedor.setBounds(120, 25, 236, 20);
+		textFieldFornecedor.setBounds(142, 25, 236, 20);
 		contentPane.add(textFieldFornecedor);
 		textFieldFornecedor.setColumns(10);
 		
 		JLabel lblNomeFornecedor = new JLabel("Nome Fornecedor");
 		lblNomeFornecedor.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblNomeFornecedor.setBounds(10, 28, 100, 14);
+		lblNomeFornecedor.setBounds(10, 28, 122, 14);
 		contentPane.add(lblNomeFornecedor);
 		
 		JLabel lblValorUnitrio = new JLabel("Valor Unit\u00E1rio");
 		lblValorUnitrio.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblValorUnitrio.setBounds(10, 70, 100, 14);
+		lblValorUnitrio.setBounds(10, 70, 122, 14);
 		contentPane.add(lblValorUnitrio);
 		
 		JLabel lblValorTotal = new JLabel("Valor Total");
 		lblValorTotal.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblValorTotal.setBounds(10, 112, 100, 14);
+		lblValorTotal.setBounds(10, 112, 122, 14);
 		contentPane.add(lblValorTotal);
 		
 		JLabel lblPrazo = new JLabel("Prazo");
 		lblPrazo.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblPrazo.setBounds(10, 154, 100, 14);
+		lblPrazo.setBounds(10, 154, 122, 14);
 		contentPane.add(lblPrazo);
 		
 		textFieldValorUnitario = new JTextField();
-		textFieldValorUnitario.setBounds(120, 67, 236, 20);
+		textFieldValorUnitario.setBounds(142, 67, 236, 20);
 		contentPane.add(textFieldValorUnitario);
 		textFieldValorUnitario.setColumns(10);
 		
 		textFieldValorTotal = new JTextField();
-		textFieldValorTotal.setBounds(120, 109, 236, 20);
+		textFieldValorTotal.setBounds(142, 109, 236, 20);
 		contentPane.add(textFieldValorTotal);
 		textFieldValorTotal.setColumns(10);
 		
 		textFieldPrazo = new JTextField();
-		textFieldPrazo.setBounds(120, 151, 236, 20);
+		textFieldPrazo.setBounds(142, 151, 236, 20);
 		contentPane.add(textFieldPrazo);
 		textFieldPrazo.setColumns(10);
 		
 		btnOk = new JButton("OK");
-		btnOk.setBounds(120, 182, 89, 23);
+		btnOk.setBounds(152, 182, 89, 23);
 		contentPane.add(btnOk);
 		
 		btnCancelar = new JButton("Cancelar");
@@ -100,7 +100,7 @@ public class Add extends JFrame {
 			public void actionPerformed(ActionEvent e) {				
 			}
 		});
-		btnCancelar.setBounds(219, 182, 89, 23);
+		btnCancelar.setBounds(251, 182, 89, 23);
 		contentPane.add(btnCancelar);
 	}
 
