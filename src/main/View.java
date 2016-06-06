@@ -27,6 +27,12 @@ import com.sun.org.apache.bcel.internal.generic.LALOAD;
 
 import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
+import java.awt.event.InputMethodListener;
+import java.awt.event.InputMethodEvent;
+import java.text.AttributedCharacterIterator;
+import java.beans.VetoableChangeListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 
 public class View extends JFrame {
 
@@ -39,7 +45,7 @@ public class View extends JFrame {
 	private boolean pnlSolicitacao = false;
 	private boolean pnlCotacao = false;
 	private boolean pnlPedidos = false;
-	private JTextField textField;
+	private JTextField textFieldQtd;
 	private JLabel lblObs = new JLabel("Material Cirúrgico");
 	
 	/**
@@ -291,10 +297,10 @@ public class View extends JFrame {
 		lblQuantidade.setBounds(10, 68, 72, 14);
 		panelCotacao.add(lblQuantidade);
 
-		textField = new JTextField();
-		textField.setBounds(82, 65, 180, 20);
-		panelCotacao.add(textField);
-		textField.setColumns(10);
+		textFieldQtd = new JTextField();									
+		textFieldQtd.setBounds(82, 65, 180, 20);
+		panelCotacao.add(textFieldQtd);
+		textFieldQtd.setColumns(10);
 
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(null, "Fornecedores", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -306,7 +312,7 @@ public class View extends JFrame {
 		btnAdicionarFornecedor.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Add add = new Add();
-				add.setVisible(true);
+				add.setVisible(true);				
 			}
 		});
 		btnAdicionarFornecedor.setBounds(10, 25, 159, 23);
@@ -324,6 +330,7 @@ public class View extends JFrame {
 		lblObs.setBounds(272, 68, 284, 14);
 		panelCotacao.add(lblObs);
 		panelCotacao.setVisible(false);
-		contentPane.setLayout(gl_contentPane);
+		contentPane.setLayout(gl_contentPane);		
+		
 	}
 }

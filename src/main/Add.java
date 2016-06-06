@@ -2,6 +2,7 @@ package main;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.Frame;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -10,6 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -92,12 +94,18 @@ public class Add extends JFrame {
 		textFieldPrazo.setColumns(10);
 		
 		btnOk = new JButton("OK");
+		btnOk.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {												
+				setVisible(false);
+			}
+		});
 		btnOk.setBounds(152, 182, 89, 23);
 		contentPane.add(btnOk);
 		
 		btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {				
+				setVisible(false);
 			}
 		});
 		btnCancelar.setBounds(251, 182, 89, 23);
