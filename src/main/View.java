@@ -45,7 +45,7 @@ public class View extends JFrame {
 	private boolean pnlSolicitacao = false;
 	private boolean pnlCotacao = false;
 	private boolean pnlPedidos = false;
-	private JTextField textFieldQtd;
+	public JTextField textFieldQtd;
 	private JLabel lblObs = new JLabel("Material Cirúrgico");
 	
 	/**
