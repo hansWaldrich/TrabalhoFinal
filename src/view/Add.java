@@ -15,7 +15,7 @@ import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class Add extends JFrame {
+public class Add extends View {
 
 	private JPanel contentPane;
 	private JTextField textFieldFornecedor;
@@ -83,7 +83,21 @@ public class Add extends JFrame {
 		contentPane.add(textFieldValorUnitario);
 		textFieldValorUnitario.setColumns(10);
 		
+		textFieldValorUnitario.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (textFieldValorUnitario.getText() != null || !textFieldValorUnitario.getText().equals("")) {
+					//int qtdProd = Integer.parseInt(textFieldQtd.getText()); alterar esta função.
+					int vlrUnit = Integer.parseInt(textFieldValorUnitario.getText());
+					//textFieldValorTotal.setText(String.valueOf((qtdProd*vlrUnit)));
+				}
+				
+			}
+		});
+		
 		textFieldValorTotal = new JTextField();
+		textFieldValorTotal.setEnabled(false);
 		textFieldValorTotal.setBounds(142, 109, 236, 20);
 		contentPane.add(textFieldValorTotal);
 		textFieldValorTotal.setColumns(10);
