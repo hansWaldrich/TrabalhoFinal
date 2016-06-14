@@ -1,4 +1,4 @@
-package main;
+package view;
 
 import java.awt.Color;
 import java.awt.EventQueue;
@@ -311,7 +311,7 @@ public class View extends JFrame {
 		JButton btnAdicionarFornecedor = new JButton("Adicionar Fornecedor");
 		btnAdicionarFornecedor.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Add add = new Add();
+				Add add = new Add(textFieldQtd.getText());
 				add.setVisible(true);				
 			}
 		});

@@ -1,4 +1,4 @@
-package main;
+package view;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -32,7 +32,7 @@ public class Add extends View {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Add frame = new Add();
+					Add frame = new Add("");
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -44,7 +44,7 @@ public class Add extends View {
 	/**
 	 * Create the frame.
 	 */
-	public Add() {
+	public Add(String qtdCotacao) {
 		setTitle("Adicionar Cota\u00E7\u00E3o Fornecedor");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 318);
@@ -88,9 +88,9 @@ public class Add extends View {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (textFieldValorUnitario.getText() != null || !textFieldValorUnitario.getText().equals("")) {
-					//int qtdProd = Integer.parseInt(textFieldQtd.getText()); alterar esta função.
+					int qtdProd = Integer.parseInt(qtdCotacao);
 					int vlrUnit = Integer.parseInt(textFieldValorUnitario.getText());
-					//textFieldValorTotal.setText(String.valueOf((qtdProd*vlrUnit)));
+					textFieldValorTotal.setText(String.valueOf((qtdProd*vlrUnit)));
 				}
 				
 			}
